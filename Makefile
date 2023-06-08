@@ -6,7 +6,7 @@
 #    By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 14:21:12 by madmax42          #+#    #+#              #
-#    Updated: 2023/06/07 21:42:16 by madmax42         ###   ########.fr        #
+#    Updated: 2023/06/08 11:07:18 by madmax42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,18 @@ MLXFLAGS					=	-lmlx_linux -X11 -lXext -lm
 LIB_PATHS					=	./libft/libft.a ./mlx_linux/libmlx_linux.a
 
 RM							=	rm -rf
+
+SRCS						=	main.c
+
+#VPATH						= 	./srcs/
+
+OBJS_DIR					=	objects
+OBJS						=	$(patsubst %.c, $(OBJS_DIR)/%.o, $(SRCS))
+
+
+$(OBJS_DIR)/%.o:			%.c
+							@mkdir -p $(OBJS_DIR)
+							$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 all:						$(LIB_PATHS) $(NAME)
 

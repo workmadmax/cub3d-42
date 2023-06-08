@@ -1,0 +1,3 @@
+// flags para compilar na mão xD
+
+gcc main.c ./mlx-linux/libmlx_Linux.a -Imlx_linux -lXext -lX11 -lm -lz -O3
