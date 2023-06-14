@@ -6,51 +6,53 @@
 #    By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 14:21:12 by madmax42          #+#    #+#              #
-#    Updated: 2023/06/08 11:07:18 by madmax42         ###   ########.fr        #
+#    Updated: 2023/06/14 16:22:26 by madmax42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME						=	leila
+NAME       = leila
+INCLUDES   = -I./includes -I./libft -I./mlx_linux
 
-CC							=	gcc
-CFLAGS						=	-Wall -Wextra -Werror -g3 -fsanitize=address
-MLXFLAGS					=	-lmlx_linux -X11 -lXext -lm
+CC         = gcc
+CFLAGS     = -Wall -Wextra -Werror -g3 -fsanitize=address
+MLXFLAGS   = -fPIE -lXext -lX11 -lm
 
-LIB_PATHS					=	./libft/libft.a ./mlx_linux/libmlx_linux.a
+LIBFT_PATH = ./libft
+MLX_PATH   = ./mlx_linux
 
-RM							=	rm -rf
+RM         = rm -rf
 
-SRCS						=	main.c
+SRCS       = test.c
 
-#VPATH						= 	./srcs/
+VPATH      = ./srcs/
 
-OBJS_DIR					=	objects
-OBJS						=	$(patsubst %.c, $(OBJS_DIR)/%.o, $(SRCS))
+OBJS_DIR   = objects
+OBJS       = $(patsubst %.c, $(OBJS_DIR)/%.o, $(SRCS))
 
+$(OBJS_DIR)/%.o: %.c
+	@mkdir -p $(OBJS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
-$(OBJS_DIR)/%.o:			%.c
-							@mkdir -p $(OBJS_DIR)
-							$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+all: $(LIBFT_PATH)/libft.a $(MLX_PATH)/libmlx.a $(NAME)
 
-all:						$(LIB_PATHS) $(NAME)
+$(LIBFT_PATH)/libft.a:
+	$(MAKE) -C $(LIBFT_PATH)
 
-$(LIB_PATHS):
-							$(MAKE) -C ./libft
-							$(MAKE) -C ./mlx_linux
+$(MLX_PATH)/libmlx.a:
+	$(MAKE) -C $(MLX_PATH)
 
-$(NAME):					$(OBJS)
-							$(CC) $(CFLAGS) $(MLXFLAGS) $(LIB_PATHS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT_PATH)/libft.a $(MLX_PATH)/libmlx.a
+	$(CC) $(CFLAGS) $(MLXFLAGS) -L$(MLX_PATH) -L$(LIBFT_PATH) -lmlx -lft $(OBJS) -o $(NAME)
 
 clean:
-							$(MAKE) -C ./libft clean
-							$(MAKE) -C ./mlx_linux clean
-							$(RM) *.o
+	$(MAKE) -C $(LIBFT_PATH) clean
+	$(MAKE) -C $(MLX_PATH) clean
+	$(RM) $(OBJS_DIR)
 
-fclean:						clean
-							make clean -C ./libft
-							make clean -C ./mlx_linux
-							$(RM) $(NAME)
-							
-re:							fclean all
+fclean: clean
+	$(MAKE) -C $(LIBFT_PATH) fclean
+	$(RM) $(NAME)
 
-.PHONY:						all clean fclean re
+re: fclean all
+
+.PHONY: all clean fclean re
