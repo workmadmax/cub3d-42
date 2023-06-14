@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:03:56 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/14 16:23:23 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/14 17:14:06 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "structs.h"
 # include "defines.h"
 
-# include "../mlx_linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../libft/include/libft.h"
 
 # include <stdio.h>
