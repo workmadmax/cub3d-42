@@ -6,74 +6,38 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:32:12 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/14 17:40:23 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/15 11:17:47 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 
-// read and validate map.cub
-
-/*
-	function that will receive a map as an argument, 
-	I will use open() to open the map and the function get_next_line to read the map
-*/
-
-
-#define MAX_LINES 100
-
-void	read_map(char **map, const char *filename)
+int main(int argc, char *argv[])
 {
-	int		i;
-	int		fd;
-	char	*line;
+    if (argc != 2) {
+        printf("Uso: %s <nome_do_arquivo>\n", argv[0]);
+        return (1);
+    }
 
-	i = 0;
-	fd = open(filename, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		map[i] = strdup(line);
-		free(line);
-		i++;
-		line = get_next_line(fd);
-	}
-	map[i] = NULL;
-	close(fd);
+    const char *filename = argv[1];
+    char **map = NULL;
+
+    printf("Contando as linhas do mapa...\n");
+    int num_lines = count_map_lines(filename);
+    printf("Número de linhas do mapa: %d\n", num_lines);
+
+    printf("Lendo as linhas do mapa...\n");
+    read_map_lines(&map, filename, num_lines);
+    printf("Mapa lido:\n");
+	
+	// Imprimir o mapa
+    for (int i = 0; map[i] != NULL; i++)
+        printf("%s\n", map[i]);
+
+    // Liberar a memória alocada para o mapa
+    for (int i = 0; map[i] != NULL; i++)
+        free(map[i]);
+    free(map);
+    return (0);
 }
-
-int	main(int argc, char *argv[])
-{
-	char	*filename;
-	char	*map[MAX_LINES];
-	int		i;
-
-	i = 0;
-	if (argc != 2)
-	{
-		printf("Uso: %s <nome_do_arquivo>\n", argv[0]);
-		return (1);
-	}
-	filename = argv[1];
-	while (i < MAX_LINES)
-	{
-		map[i] = NULL;
-		i++;
-	}
-	read_map(map, filename);
-	i = 0;
-	while (map[i] != NULL)
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-	i = 0;
-	while (map[i] != NULL)
-	{
-		free(map[i]);
-		i++;
-	}
-	return (0);
-}
-
