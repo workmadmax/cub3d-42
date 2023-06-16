@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:03:56 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/15 14:43:21 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:11:03 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,13 @@ char	*remove_newlines(const char *string);
 /* utils map */
 int		count_map_lines(const char *filename);
 void	get_map_dimensions(char **map, t_map *dimensions);
+
+/* utils */
+
+char	**ft_array_dup(char **array);
+
+void	find_player_position(char **map, t_map map_size, int *pos_x, int *pos_y);
+void	set_player_direction(char **map, int pos_x, int pos_y, t_player *player);
+void	get_player_position(char **map, t_map map_size, t_player *player);
 
 #endif
