@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:03:56 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/16 14:11:03 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:51:18 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,31 @@
 # include <error.h>
 # include <math.h>
 # include <stdbool.h>
+# include <string.h>
 
 
-/* validae map */
+/* handle file */
 
-void	read_map_lines(char ***map, const char *filename, int num_lines);
-char	*remove_newlines(const char *string);
+bool	open_file(const char *filename, int *fd);
+bool	remove_newlines(char *str);
+bool	update_map_dimensions(const char *line, t_map *map);
+bool	read_file(int fd, t_map *map);
+bool	process_map_file(const char *filename, t_cub3d *cub3d);
 
-/* utils map */
-int		count_map_lines(const char *filename);
-void	get_map_dimensions(char **map, t_map *dimensions);
+/* validate map */
 
-/* utils */
+bool	validate_required_fields(const t_map *map);
+bool	validate_texture_extension(const char *texture);
+bool	validate_texture_extensions(const t_cub3d *cub3d);
+bool	validate_map(const t_cub3d *cub3d);
 
-char	**ft_array_dup(char **array);
+/* utils - init data */
 
-void	find_player_position(char **map, t_map map_size, int *pos_x, int *pos_y);
-void	set_player_direction(char **map, int pos_x, int pos_y, t_player *player);
-void	get_player_position(char **map, t_map map_size, t_player *player);
+void	initialize_cub3d(t_cub3d *cub3d);
+void	initialize_map(t_map *map);
+
+/* utils libft */
+
+int		ft_strcmp(const char *str1, const char *str2);
 
 #endif

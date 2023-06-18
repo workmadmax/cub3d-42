@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:00:23 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/18 14:21:04 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:24:59 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ bool	process_map_file(const char *filename, t_cub3d *cub3d)
 	if (!open_file(filename, &fd))
 		return (false);
 	// Inicializar as informações do mapa nas structs
-	cub3d->dimensions.width = 0;
-	cub3d->dimensions.height = 0;
-	if (!read_file(fd, &(cub3d->dimensions)))
+	cub3d->map.width = 0;
+	cub3d->map.height = 0;
+	if (!read_file(fd, &(cub3d->map)))
 		return (false);
 	if (close(fd) == -1)
 	{
