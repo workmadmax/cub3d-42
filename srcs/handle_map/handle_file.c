@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:00:23 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/17 18:20:12 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:21:04 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,18 @@ bool	remove_newlines(char *str)
 	return (false);
 }
 
-bool	read_file(int fd)
+bool	update_map_dimensions(const char *line, t_map *map)
+{
+	int	line_width;
+
+	line_width = strlen(line);
+	if (line_width > map->width)
+		map->width = line_width;
+	map->height++;
+	return (true);
+}
+
+bool	read_file(int fd, t_map *map)
 {
 	char	*ret;
 
@@ -45,20 +56,26 @@ bool	read_file(int fd)
 		ret = get_next_line(fd);
 		if (ret == NULL)
 			break ;
-		remove_newlines(ret);
+		if (!remove_newlines(ret))
+			return (false); // pensei que pode ser um exit_data com uma mensagem de erro
 		printf("%s\n", ret);
+		if (!update_map_dimensions(ret, map))
+			return (false); // pensei que pode ser um exit_data com uma mensagem de erro
 		free(ret);
 	}
 	return (true);
 }
 
-bool	process_map_file(const char *filename)
+bool	process_map_file(const char *filename, t_cub3d *cub3d)
 {
-	int		fd;
+	int	fd;
 
 	if (!open_file(filename, &fd))
 		return (false);
-	if (!read_file(fd))
+	// Inicializar as informações do mapa nas structs
+	cub3d->dimensions.width = 0;
+	cub3d->dimensions.height = 0;
+	if (!read_file(fd, &(cub3d->dimensions)))
 		return (false);
 	if (close(fd) == -1)
 	{
