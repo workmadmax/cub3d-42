@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_map.c                                        :+:      :+:    :+:   */
+/*   clean_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 19:20:59 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/20 10:58:38 by madmax42         ###   ########.fr       */
+/*   Created: 2023/06/19 15:59:50 by madmax42          #+#    #+#             */
+/*   Updated: 2023/06/19 16:27:45 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_bool	update_map_dimensions(const char *line, t_cub3d *cub3d)
+void	free_map(char **map_data)
 {
-	int	line_width;
+	int	i;
 
-	line_width = ft_strlen(line);
-	if (line_width > cub3d->map.width)
-		cub3d->map.width = line_width;
-	cub3d->map.height++;
-	return (TRUE);
+	if (map_data == NULL)
+		return ;
+	i = 0;
+	while (map_data[i] != NULL)
+	{
+		free(map_data[i]);
+		i++;
+	}
+	free(map_data);
 }
 
-t_bool	remove_newlines(char *str)
+bool	remove_newlines(char *str)
 {
 	char	*nl_position;
 
@@ -31,9 +35,7 @@ t_bool	remove_newlines(char *str)
 	if (nl_position != NULL)
 	{
 		*nl_position = '\0';
-		return (TRUE);
+		return (true);
 	}
-	return (FALSE);
+	return (false);
 }
-
-
