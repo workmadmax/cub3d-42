@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:00:23 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/20 11:51:52 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:04:50 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,35 @@ t_bool	read_map_file(int fd, t_cub3d *cub3d)
 	return (TRUE);
 }
 
-
 t_bool	process_map_line(char *line, t_cub3d *cub3d, int *map_lines)
+{
+	if (!remove_newlines(line))
+	{
+		printf("Erro ao remover quebras de linha.\n");
+		free(line);
+		return (FALSE);
+	}
+	if (!update_map_dimensions(line, cub3d))
+	{
+		printf("Erro ao atualizar as dimensões do mapa.\n");
+		free(line);
+		return (FALSE);
+	}
+	cub3d->map_file_content[(*map_lines)++] = line;
+	if (!ft_array_dup(cub3d->map_file_content, &(cub3d->map_file_copy)))
+	{
+		printf("Erro ao duplicar o array de conteúdo do arquivo do mapa.\n");
+		return (FALSE);
+	}
+	if (!validate_map(cub3d))
+	{
+		printf("Erro ao validar o mapa.\n");
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
+/* t_bool	process_map_line(char *line, t_cub3d *cub3d, int *map_lines)
 {
 	if (!remove_newlines(line))
 	{
@@ -66,3 +93,4 @@ t_bool	process_map_line(char *line, t_cub3d *cub3d, int *map_lines)
 	cub3d->map_file_copy = ft_array_dup(cub3d->map_file_content);
 	return (TRUE);
 }
+ */
