@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:03:56 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/18 15:51:18 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:13:35 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,50 @@
 # include <fcntl.h>
 # include <error.h>
 # include <math.h>
-# include <stdbool.h>
 # include <string.h>
 
 
-/* handle file */
+/* ====== handle map file ====== */
 
-bool	open_file(const char *filename, int *fd);
-bool	remove_newlines(char *str);
-bool	update_map_dimensions(const char *line, t_map *map);
-bool	read_file(int fd, t_map *map);
-bool	process_map_file(const char *filename, t_cub3d *cub3d);
+t_bool	open_map_file(const char *filename, int *fd);
+t_bool	read_map_file(int fd, t_cub3d *cub3d);
+t_bool	process_map_line(char *line, t_cub3d *cub3d, int *map_lines);
 
-/* validate map */
 
-bool	validate_required_fields(const t_map *map);
-bool	validate_texture_extension(const char *texture);
-bool	validate_texture_extensions(const t_cub3d *cub3d);
-bool	validate_map(const t_cub3d *cub3d);
+/* ====== utils map ====== */
 
-/* utils - init data */
+t_bool	update_map_dimensions(const char *line, t_cub3d *cub3d);
+t_bool	remove_newlines(char *str);
 
-void	initialize_cub3d(t_cub3d *cub3d);
-void	initialize_map(t_map *map);
+/* ====== validate map ====== */
 
-/* utils libft */
+t_bool	validate_map(const t_cub3d *cub3d);
+
+/* ====== validate texture ====== */
+
+t_bool	validate_required_fields(const t_map *map);
+t_bool	validate_texture_extension(const char *texture);
+t_bool	validate_texture(const t_cub3d *cub3d);
+
+/* ====== utils ====== */
+
+/* ====== clean data ====== */
+void	free_map(char **map_data);
+
+
+
+/* ====== libft ====== */
 
 int		ft_strcmp(const char *str1, const char *str2);
+
+/* ====== testes ====== */
+
+t_bool	ft_array_dup(char **array, char ***cpy);
+
+
+/* free data */
+
+void	ft_free_map(t_map *map);
+void	ft_free_array(t_cub3d *cub3d);
 
 #endif
