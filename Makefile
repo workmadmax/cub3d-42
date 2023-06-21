@@ -6,7 +6,7 @@
 #    By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 14:21:12 by madmax42          #+#    #+#              #
-#    Updated: 2023/06/18 15:53:52 by madmax42         ###   ########.fr        #
+#    Updated: 2023/06/21 10:02:51 by madmax42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,12 @@ MLX_LINUX					=	$(MLX_PATH)/libmlx_Linux.a
 INCLUDES					=	-I./includes -I$(LIBFT_PATH) -I$(MLX_PATH)
 
 SRCS						=	test.c \
-									handle_file.c \
+									handle_map_file.c \
+									utils_map.c \
 									validate_map.c \
+									validate_texture.c \
+									clean_data.c \
+									free_data.c \
 									init_data.c \
 									libft.c \
 									
