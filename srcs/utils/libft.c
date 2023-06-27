@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:45:22 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/21 09:56:32 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:30:54 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,29 @@ t_bool	ft_array_dup(char **array, char ***cpy)
 	while (len--)
 		(*cpy)[len] = ft_strdup(array[len]);
 	return (TRUE);
+}
+
+void	flood_fill(t_cub3d *game, int x, int y)
+{
+	char	*p;
+
+	p = &game->map_file_copy[y][x];
+	if (*p != '1')
+	{
+		*p = '.';
+		if (game->map_file_copy[y][x + 1] != '1'
+				&& game->map_file_copy[y][x + 1] != '.')
+			flood_fill(game, x + 1, y);
+		if (game->map_file_copy[y][x - 1] != '1'
+				&& game->map_file_copy[y][x - 1] != '.')
+			flood_fill(game, x - 1, y);
+		if (game->map_file_copy[y + 1][x] != '1'
+				&& game->map_file_copy[y + 1][x] != '.')
+			flood_fill(game, x, y + 1);
+		if (game->map_file_copy[y - 1][x] != '1'
+				&& game->map_file_copy[y - 1][x] != '.')
+			flood_fill(game, x, y - 1);
+	}
 }
 
 /* 
