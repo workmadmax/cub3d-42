@@ -6,11 +6,12 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:00:23 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/21 11:04:50 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:13:53 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 t_bool	open_map_file(const char *filename, int *fd)
 {
@@ -23,28 +24,96 @@ t_bool	open_map_file(const char *filename, int *fd)
 	return (TRUE);
 }
 
-t_bool	read_map_file(int fd, t_cub3d *cub3d)
+t_bool	read_map_file_data(t_cub3d *cub3d, int fd)
 {
-	int		map_lines;
-	char	*ret;
+	int		map_line;
+	char	*line;
 
-	map_lines = 0;
-	ret = NULL;
+	map_line = 0;
+	line = NULL;
 	while (TRUE)
 	{
-		ret = get_next_line(fd);
-		if (ret == NULL)
+		line = get_next_line(fd);
+		if (line == NULL)
 			break ;
-		if (!process_map_line(ret, cub3d, &map_lines))
+		remove_newlines(line);
+		if (!process_map_data(cub3d, line))
 		{
-			free(ret);
+			free(line);
 			return (FALSE);
 		}
+		printf("%s\n", line);
+		cub3d->map_file_content[map_line++] = line;
 	}
-	cub3d->map.lines = map_lines;
-	cub3d->map_file_content[map_lines] = NULL;
+	cub3d->map.lines = map_line;
+	cub3d->map_file_content[map_line] = NULL;
 	return (TRUE);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* t_bool	read_file(int fd, t_cub3d *cub3d)
+{
+	int		cnt_lines;
+	char	*content;
+	t_bool	continue_reading;
+
+	cnt_lines = 0;
+	continue_reading = TRUE;
+	while (continue_reading)
+	{
+		content = get_next_line(fd);
+		if (content)
+		{
+			remove_newlines(content);
+			printf("%s\n", content);
+			cnt_lines++;
+			free(content);
+		}
+		else
+			continue_reading = FALSE;
+	}
+	return (TRUE);
+}
+
+t_bool	handle_map_file(char *file_name, t_cub3d *cub3d)
+{
+	int	fd;
+
+	if (!open_map_file(file_name, &fd))
+	{
+		printf("Falha ao abrir o arquivo.\n");
+		return (FALSE);
+	}
+	if (!read_file(fd, cub3d))
+	{
+		printf("Falha ao ler o arquivo.\n");
+		close(fd);
+		return (FALSE);
+	}
+	close(fd);
+	return (TRUE);
+}
+
 
 t_bool	process_map_line(char *line, t_cub3d *cub3d, int *map_lines)
 {
@@ -73,6 +142,7 @@ t_bool	process_map_line(char *line, t_cub3d *cub3d, int *map_lines)
 	}
 	return (TRUE);
 }
+*/
 
 /* t_bool	process_map_line(char *line, t_cub3d *cub3d, int *map_lines)
 {
