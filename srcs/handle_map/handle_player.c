@@ -5,57 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 10:41:31 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/27 10:45:40 by madmax42         ###   ########.fr       */
+/*   Created: 2023/07/01 11:33:29 by madmax42          #+#    #+#             */
+/*   Updated: 2023/07/01 12:05:56 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-t_bool	is_player_character(char tile)
+void	set_info_player(int x, int y, int dir_x, int dir_y)
 {
-	return (tile == 'N' || tile == 'S' || tile == 'E' || tile == 'W');
+	t_player	*player;
+
+	player = malloc(sizeof(t_player));
+	player->x = x;
+	player->y = y;
+	player->dir_x = dir_x;
+	player->dir_y = dir_y;
 }
 
-// Função para encontrar as coordenadas iniciais e finais do labirinto na matriz
-void	find_maze_bounds(t_cub3d *cub3d)
+void	update_player_position(t_cub3d *cub3d, int x, int y, char tile)
 {
-	cub3d->map.start_x = 0;
-	cub3d->map.end_x = cub3d->map.width - 1;
-	cub3d->map.start_y = 1;
+	cub3d->player->x = x;
+	cub3d->player->y = y;
+
+	if (tile == 'N')
+	{
+		cub3d->player->dir_x = 0;
+		cub3d->player->dir_y = -1;
+	}
+	else if (tile == 'S')
+	{
+		cub3d->player->dir_x = 0;
+		cub3d->player->dir_y = 1;
+	}
+	else if (tile == 'E')
+	{
+		cub3d->player->dir_x = 1;
+		cub3d->player->dir_y = 0;
+	}
+	else if (tile == 'W')
+	{
+		cub3d->player->dir_x = -1;
+		cub3d->player->dir_y = 0;
+	}
 }
 
-// Função para encontrar a posição do jogador no labirinto
-t_bool	find_player_position(t_cub3d *cub3d)
+void	find_player_position(t_cub3d *cub3d)
 {
 	int		i;
 	int		j;
 	char	tile;
 
-	i = cub3d->map.start_y;
-	while (i < cub3d->map.height)
+	i = 0;
+	j = 0;
+	while (i < cub3d->map.lines)
 	{
-		j = cub3d->map.start_x;
-		while (j <= cub3d->map.end_x)
+		j = 0;
+		while (j < cub3d->map.width)
 		{
 			tile = cub3d->map_file_content[i][j];
-			if (is_player_character(tile))
+			if (tile == 'N' || tile == 'S' || tile == 'E' || tile == 'W')
 			{
-				cub3d->map.player.x = j;
-				cub3d->map.player.y = i;
-				return (TRUE);
+				update_player_position(cub3d, j, i, tile);
+				return ;
 			}
 			j++;
 		}
 		i++;
 	}
-	return (FALSE);
-}
-
-// Função principal para obter a posição do jogador
-t_bool	get_player_position(t_cub3d *cub3d)
-{
-	find_maze_bounds(cub3d);
-	return (find_player_position(cub3d));
 }
