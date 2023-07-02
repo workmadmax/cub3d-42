@@ -6,20 +6,36 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:39:16 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/21 10:06:44 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:11:02 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-t_bool	validate_map(const t_cub3d *cub3d)
+t_bool	validate_map_characters(t_cub3d *cub3d)
 {
-	if (!validate_required_fields(&(cub3d->map))
-		|| !validate_texture(cub3d))
+	int		i;
+	int		j;
+	char	*valid_chars;
+	char	curr_ch;
+
+	i = 0;
+	j = 0;
+	valid_chars = "01NSEW";
+	while (i < cub3d->map.lines)
 	{
-		return (FALSE);
+		while (j < cub3d->map.width)
+		{
+			curr_ch = cub3d->map_file_copy[i][j];
+			if (curr_ch != ' ' && strchr(valid_chars, curr_ch) == NULL)
+			{
+				printf("Err: Char invalid  no mapa: %c\n", curr_ch);
+				return (FALSE);
+			}
+			j++;
+		}
+		i++;
+		j = 0;
 	}
-	// Adicione outras validações necessárias aqui 
 	return (TRUE);
 }
