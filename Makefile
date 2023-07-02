@@ -6,7 +6,7 @@
 #    By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 14:21:12 by madmax42          #+#    #+#              #
-#    Updated: 2023/06/21 10:02:51 by madmax42         ###   ########.fr        #
+#    Updated: 2023/06/27 10:46:18 by madmax42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS						=	test.c \
 									handle_map_file.c \
 									utils_map.c \
 									validate_map.c \
+									handle_player.c \
 									validate_texture.c \
 									clean_data.c \
 									free_data.c \

@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:03:56 by madmax42          #+#    #+#             */
-/*   Updated: 2023/06/21 10:13:35 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/01 16:04:52 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,16 @@
 /* ====== handle map file ====== */
 
 t_bool	open_map_file(const char *filename, int *fd);
-t_bool	read_map_file(int fd, t_cub3d *cub3d);
-t_bool	process_map_line(char *line, t_cub3d *cub3d, int *map_lines);
+t_bool	read_map_file_data(t_cub3d *cub3d, int fd);
+t_bool	process_map_data(t_cub3d *cub3d, char *line);
+t_bool	copy_map_content(t_cub3d *cub3d, int map_line);
+
+
+/* ======= handle player ====== */
+
+void	set_info_player(int x, int y, int dir_x, int dir_y);
+void	update_player_position(t_cub3d *cub3d, int x, int y, char tile);
+void	find_player_position(t_cub3d *cub3d);
 
 
 /* ====== utils map ====== */
@@ -42,7 +50,7 @@ t_bool	remove_newlines(char *str);
 
 /* ====== validate map ====== */
 
-t_bool	validate_map(const t_cub3d *cub3d);
+t_bool	validate_map_characters(t_cub3d *cub3d);
 
 /* ====== validate texture ====== */
 
@@ -60,6 +68,8 @@ void	free_map(char **map_data);
 /* ====== libft ====== */
 
 int		ft_strcmp(const char *str1, const char *str2);
+void	flood_fill(t_cub3d *cub3d, int x, int y);
+t_bool	ft_array_dup(char **array, char ***cpy);
 
 /* ====== testes ====== */
 
