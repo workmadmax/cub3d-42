@@ -6,13 +6,15 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 12:32:12 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/01 16:19:35 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:50:44 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdbool.h>
 #include <string.h>
+
+#define MAX_MAP_LINES 10000
 
 void	init_cub3d(t_cub3d *cub3d)
 {
@@ -50,24 +52,6 @@ t_bool	process_map_data(t_cub3d *cub3d, char *line)
 	return (TRUE);
 }
 
-#define MAX_MAP_LINES 10000
-
-
-void apply_flood_fill(t_cub3d *cub3d)
-{
-    int i, j;
-
-    for (i = 0; i < cub3d->map.lines; i++)
-    {
-        for (j = 0; j < cub3d->map.width; j++)
-        {
-            if (cub3d->map_file_copy[i][j] == '0')
-            {
-                flood_fill(cub3d, j, i);
-            }
-        }
-    }
-}
 
 int	main(int arg, char **argv)
 {

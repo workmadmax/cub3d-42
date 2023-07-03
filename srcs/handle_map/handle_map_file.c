@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 16:00:23 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/02 11:09:44 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/03 15:27:11 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_bool	read_map_file_data(t_cub3d *cub3d, int fd)
 			free(line);
 			return (FALSE);
 		}
-		printf("%s\n", line);
 		cub3d->map_file_content[map_line++] = line;
 	}
 	if (!copy_map_content(cub3d, map_line))
@@ -63,4 +62,25 @@ t_bool	read_map_file_data(t_cub3d *cub3d, int fd)
 		return (FALSE);
 	}
 	return (TRUE);
+}
+
+void	apply_flood_fill(t_cub3d *cub3d)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < cub3d->map.lines)
+	{
+		j = 0;
+		while (j < cub3d->map.width)
+		{
+			if (cub3d->map_file_copy[i][j] == '0')
+			{
+				flood_fill(cub3d, j, i);
+			}
+			j++;
+		}
+		i++;
+	}
 }

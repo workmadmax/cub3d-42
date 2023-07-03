@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:03:56 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/01 16:04:52 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:07:12 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	find_player_position(t_cub3d *cub3d);
 
 t_bool	update_map_dimensions(const char *line, t_cub3d *cub3d);
 t_bool	remove_newlines(char *str);
+void	apply_flood_fill(t_cub3d *cub3d);
 
 /* ====== validate map ====== */
 
