@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:45:22 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/01 16:11:25 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:32:49 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,26 @@ void	flood_fill(t_cub3d *cub3d, int x, int y)
 {
 	char	*p;
 
+	if (x < 0 || x >= cub3d->map.width || y < 0 || y >= cub3d->map.lines)
+		return ;
 	p = &cub3d->map_file_copy[y][x];
-	if (*p != '1')
+	if (*p != '1' && *p != '.')
 	{
 		*p = '.';
-		if (cub3d->map_file_copy[y][x + 1] != '1'
-				&& cub3d->map_file_copy[y][x + 1] != '.')
+		if (x + 1 < cub3d->map.width && cub3d->map_file_copy[y][x + 1] != '1'
+			&& cub3d->map_file_copy[y][x + 1] != '.')
 			flood_fill(cub3d, x + 1, y);
-		if (cub3d->map_file_copy[y][x - 1] != '1'
-				&& cub3d->map_file_copy[y][x - 1] != '.')
+		if (x - 1 >= 0 && cub3d->map_file_copy[y][x - 1] != '1'
+			&& cub3d->map_file_copy[y][x - 1] != '.')
 			flood_fill(cub3d, x - 1, y);
-		if (cub3d->map_file_copy[y + 1][x] != '1'
-				&& cub3d->map_file_copy[y + 1][x] != '.')
+		if (y + 1 < cub3d->map.lines
+			&& x < (int)strlen(cub3d->map_file_copy[y + 1])
+			&& cub3d->map_file_copy[y + 1][x] != '1'
+			&& cub3d->map_file_copy[y + 1][x] != '.')
 			flood_fill(cub3d, x, y + 1);
-		if (cub3d->map_file_copy[y - 1][x] != '1'
-				&& cub3d->map_file_copy[y - 1][x] != '.')
+		if (y - 1 >= 0 && x < (int)strlen(cub3d->map_file_copy[y - 1])
+			&& cub3d->map_file_copy[y - 1][x] != '1'
+			&& cub3d->map_file_copy[y - 1][x] != '.')
 			flood_fill(cub3d, x, y - 1);
 	}
 }
