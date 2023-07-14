@@ -6,19 +6,19 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 19:44:59 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/13 16:03:07 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:45:48 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	count_file_lines(const char *path)
+static int	count_file_lines(const char *file)
 {
 	int		result;
 	int		fd;
 	char	*line;
 
-	fd = open(path, O_RDONLY);
+	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (FAILURE);
 	result = -1;

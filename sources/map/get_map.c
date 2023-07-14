@@ -6,13 +6,13 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 19:47:17 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/13 16:03:55 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:47:14 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_line(char *line)
+int	get_line_code(char *line)
 {
 	int		status;
 	char	**split;
@@ -55,7 +55,7 @@ static int	map_count_line(char **map)
 	size = 0;
 	while (map[i])
 	{
-		if (get_line(map[i]) == WALL)
+		if (get_line_code(map[i]) == WALL)
 			size++;
 		i++;
 	}
@@ -73,7 +73,7 @@ static int	max_colum(char **map)
 	max = 0;
 	while (map[i])
 	{
-		if (get_line(map[i]) == WALL)
+		if (get_line_code(map[i]) == WALL)
 		{
 			size = ft_strlen(map[i]);
 			if (size > max)
@@ -95,7 +95,7 @@ char	**get_map(char **map)
 	j = 0;
 	while (map[++i])
 	{
-		if (get_line(map[i]) == WALL)
+		if (get_line_code(map[i]) == WALL)
 		{
 			content[j] = ft_calloc(max_colum(map) + 1, sizeof(char));
 			ft_strlcpy(content[j], map[i], ft_strlen(map[i]) + 1);
