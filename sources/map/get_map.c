@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 19:47:17 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/14 17:47:14 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:29:37 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,19 @@ static int	max_colum(char **map)
 {
 	int	i;
 	int	size;
-	int	max;
 
 	i = 0;
 	size = 0;
-	max = 0;
 	while (map[i])
 	{
 		if (get_line_code(map[i]) == WALL)
 		{
-			size = ft_strlen(map[i]);
-			if (size > max)
-				max = size;
+			if ((int)ft_strlen(map[i]) > size)
+				size = ft_strlen(map[i]);
 		}
 		i++;
 	}
-	return (max);
+	return (size);
 }
 
 char	**get_map(char **map)
@@ -97,7 +94,7 @@ char	**get_map(char **map)
 	{
 		if (get_line_code(map[i]) == WALL)
 		{
-			content[j] = ft_calloc(max_colum(map) + 1, sizeof(char));
+			content[j] = ft_calloc(max_colum(map) + 1, sizeof(char *));
 			ft_strlcpy(content[j], map[i], ft_strlen(map[i]) + 1);
 			j++;
 		}
