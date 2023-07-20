@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:11:55 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/01 11:19:39 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:59:06 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,31 @@ typedef enum e_bool
 	TRUE,
 }	t_bool;
 
-typedef struct s_player
-{
-	int		x;
-	int		y;
-	int		dir_x;
-	int		dir_y;
-}	t_player;
 
-typedef struct s_info_map
+typedef struct s_check
 {
-	int			width;
-	int			height;
-	int			lines;
-	t_player	player;
-}	t_map;
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		f;
+	int		c;
+	int		i;
+	int		status;
+}	t_check;
+typedef struct s_data
+{
+	char	**map;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+}	t_data;
 
-typedef struct s_cub3d
+typedef struct s_game
 {
-	void		*mlx;
-	void		*mlx_win;
-	char		**map_file_content;
-	char		**map_file_copy;
-	t_map		map;
-	t_player	*player;
-}	t_cub3d;
+	t_data	data;
+}	t_game;
+
 
 #endif

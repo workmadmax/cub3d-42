@@ -6,7 +6,7 @@
 #    By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 14:21:12 by madmax42          #+#    #+#              #
-#    Updated: 2023/06/27 10:46:18 by madmax42         ###   ########.fr        #
+#    Updated: 2023/07/20 11:45:59 by madmax42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,23 +20,26 @@ MLX_LINUX					=	$(MLX_PATH)/libmlx_Linux.a
 
 INCLUDES					=	-I./includes -I$(LIBFT_PATH) -I$(MLX_PATH)
 
-SRCS						=	test.c \
-									handle_map_file.c \
-									utils_map.c \
-									validate_map.c \
-									handle_player.c \
-									validate_texture.c \
-									clean_data.c \
-									free_data.c \
-									init_data.c \
-									libft.c \
-									
-								
-
-VPATH						=	./srcs/ \
-									./srcs/handle_map/ \
-									./srcs/utils/ \
-									
+SRCS						=	main.c \
+								get_map.c \
+								read_map.c \
+								assistant.c \
+								clean_data.c \
+								error_msg.c \
+								arguments.c \
+								file.c \
+								flags.c \
+								line.c \
+								map.c \
+								rgb.c \
+								texture.c \
+								wall.c \
+								text.c \
+																	
+VPATH						=	./sources/ \
+									./sources/map/ \
+									./sources/utils/ \
+									./sources/validations/ \
 
 OBJS_DIR					=	objects
 OBJS						=	$(patsubst %.c, $(OBJS_DIR)/%.o, $(SRCS))

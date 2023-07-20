@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:03:56 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/03 18:07:12 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:42:47 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,58 +28,79 @@
 # include <string.h>
 
 
-/* ====== handle map file ====== */
+/* utils - free data */
 
-t_bool	open_map_file(const char *filename, int *fd);
-t_bool	read_map_file_data(t_cub3d *cub3d, int fd);
-t_bool	process_map_data(t_cub3d *cub3d, char *line);
-t_bool	copy_map_content(t_cub3d *cub3d, int map_line);
+void	free_string(char *string);
+void	free_string_array(char **string);
+void	free_and_close(char **map);
+int		error_msg(const char *str, int code);
+
+/* map - get map */
+
+char	**get_map(char **map);
+int		get_line_code(char *line);
+int		get_flag_code(char *str);
+
+/* map - read map */
+
+char	**read_file_lines(const char *file);
+
+/* validations - arguments */
+
+int		check_amount_arguments(int argc);
+int		check_arguments(int argc, char **argv);
+
+/* validations - file */
+
+int		check_file_extension(char *file);
+int		check_file_exists(const char *file);
+
+/* validations flags */
+
+void	init_check_double_flag(t_check *data);
+void	count_flag(t_check *data);
+int		check_count_flag(t_check *data);
+int		check_double_flag(char **text);
+int		check_value_flag(char **line);
+
+/* validations line */
+
+int		check_first_word(char **line);
+int		check_line_position(char **line);
+
+/* validation map.c */
+
+int		check_char_map(char **map);
+int		check_player(char **map);
+int		check_map(char **map);
+void	check_cub_map_file(char **map);
+
+/* validation rgb */
+
+int		validate_rgb_range(const char *str);
+int		check_rgb_value(const char *line);
+int		check_rgb(char *line);
+int		check_rgb_cf(char *ceiling, char *floor);
+int		check_rgb_aux(char **line);
+
+/* validations texture */
+
+int		check_texture(char *line);
+
+/* validations wall */
+
+int		check_wall_map(char **map);
+
+/* utils */
 
 
-/* ======= handle player ====== */
-
-void	set_info_player(int x, int y, int dir_x, int dir_y);
-void	update_player_position(t_cub3d *cub3d, int x, int y, char tile);
-void	find_player_position(t_cub3d *cub3d);
-
-
-/* ====== utils map ====== */
-
-t_bool	update_map_dimensions(const char *line, t_cub3d *cub3d);
-t_bool	remove_newlines(char *str);
-void	apply_flood_fill(t_cub3d *cub3d);
-
-/* ====== validate map ====== */
-
-t_bool	validate_map_characters(t_cub3d *cub3d);
-
-/* ====== validate texture ====== */
-
-t_bool	validate_required_fields(const t_map *map);
-t_bool	validate_texture_extension(const char *texture);
-t_bool	validate_texture(const t_cub3d *cub3d);
-
-/* ====== utils ====== */
-
-/* ====== clean data ====== */
-void	free_map(char **map_data);
 
 
 
-/* ====== libft ====== */
+/* teteta */
 
-int		ft_strcmp(const char *str1, const char *str2);
-void	flood_fill(t_cub3d *cub3d, int x, int y);
-t_bool	ft_array_dup(char **array, char ***cpy);
-
-/* ====== testes ====== */
-
-t_bool	ft_array_dup(char **array, char ***cpy);
-
-
-/* free data */
-
-void	ft_free_map(t_map *map);
-void	ft_free_array(t_cub3d *cub3d);
+int	check_texture(char *line);
+int	is_numeric_string(const char *str);
+int	check_value_flag(char **line);
 
 #endif
