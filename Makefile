@@ -6,11 +6,11 @@
 #    By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 14:21:12 by madmax42          #+#    #+#              #
-#    Updated: 2023/07/20 11:45:59 by madmax42         ###   ########.fr        #
+#    Updated: 2023/07/20 12:00:52 by madmax42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME						=	so_long
+NAME						=	cub
 
 LIBFT_PATH					=	./libft
 MLX_PATH					=	./minilibx-linux
@@ -34,7 +34,6 @@ SRCS						=	main.c \
 								rgb.c \
 								texture.c \
 								wall.c \
-								text.c \
 																	
 VPATH						=	./sources/ \
 									./sources/map/ \
