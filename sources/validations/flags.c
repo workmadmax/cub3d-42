@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:42:19 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/14 17:52:47 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:18:21 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,31 @@ int	check_double_flag(char **text)
 	res = check_count_flag(data);
 	free(data);
 	return (res);
+}
+
+int	check_value_flag(char **line)
+{
+	int	i;
+	int	status;
+
+	i = -1;
+	while (line[++i])
+	{
+		status = get_line_code(line[i]);
+		if (status == 'F' || status == 'C')
+		{
+			if (check_rgb(line[i]) != SUCCESS)
+				return (error_msg("error rgb", ERROR_RGB));
+			if (status == NO || status == SO || status == WE || status == EA)
+			{
+				if (check_texture(line[i]) != SUCCESS)
+					return (FAILURE);
+			}
+			if (status == WALL)
+				break ;
+		}
+		if (check_rgb_aux(line) == 0)
+			return (error_msg("error rgb aux", ERROR_RGB));
+	}
+	return (SUCCESS);
 }
