@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_data.c                                       :+:      :+:    :+:   */
+/*   assistant.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 14:46:34 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/19 12:10:33 by madmax42         ###   ########.fr       */
+/*   Created: 2023/07/20 11:45:07 by madmax42          #+#    #+#             */
+/*   Updated: 2023/07/20 11:45:27 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_string(char *string)
-{
-	free(string);
-	string = NULL;
-}
-
-void	free_string_array(char **string)
+int	is_numeric_string(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (string[i])
+	if (!str)
+		return (FAILURE);
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '\0')
+		return (FAILURE);
+	while (str[i])
 	{
-		free(string[i]);
+		if (!ft_isdigit(str[i]))
+			return (FAILURE);
 		i++;
 	}
-	free(string);
-	string = NULL;
-}
-
-void	free_and_close(char **map)
-{
-	free_string_array(map);
-	exit (1);
+	return (SUCCESS);
 }
