@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:42:19 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/23 12:01:43 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/03 11:19:42 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,28 @@ void	count_flag(t_check *data)
 		data->c++;
 }
 
-int	check_count_flag(t_check *data)
+t_bool	check_count_flag(t_check *data)
 {
-	if (data->no != 1)
-		return (error_msg("error double flags", ERROR_COUNT_FLAG));
-	if (data->so != 1)
-		return (error_msg("error double flags", ERROR_COUNT_FLAG));
-	if (data->we != 1)
-		return (error_msg("error double flags", ERROR_COUNT_FLAG));
-	if (data->ea != 1)
-		return (error_msg("error double flags", ERROR_COUNT_FLAG));
-	if (data->f != 1)
-		return (error_msg("error double flags", ERROR_COUNT_FLAG));
-	if (data->c != 1)
-		return (error_msg("error double flags", ERROR_COUNT_FLAG));
-	return (SUCCESS);
+	if (data->no != 1 || data->so != 1 || data->we != 1 || data->ea != 1
+		|| data->f != 1 || data->c != 1)
+	{
+		error_msg("Error\n Double flag\n", ERROR_COUNT_FLAG);
+		return (FALSE);
+	}
+	return (TRUE);
 }
 
-int	check_double_flag(char **text)
+t_bool	check_double_flag(char **text)
 {
-	int		res;
+	t_bool	res;
 	t_check	*data;
 
 	data = malloc(sizeof(t_check));
 	if (!data)
-		return (error_msg("Error\nMalloc error\n", ERROR_MALLOC));
+	{
+		error_msg("Error\n Malloc error\n", ERROR_MALLOC);
+		return (FALSE);
+	}
 	init_check_double_flag(data);
 	while (text[++data->i])
 	{
@@ -72,11 +69,11 @@ int	check_double_flag(char **text)
 		count_flag(data);
 	}
 	res = check_count_flag(data);
-	free(data);
+	free (data);
 	return (res);
 }
 
-int	check_value_flag(char **line)
+t_bool	check_value_flag(char **line)
 {
 	int	i;
 	int	status;
@@ -87,18 +84,18 @@ int	check_value_flag(char **line)
 		status = get_line_code(line[i]);
 		if (status == 'F' || status == 'C')
 		{
-			if (check_rgb(line[i]) != SUCCESS)
-				return (error_msg("error rgb", ERROR_RGB));
+			if (check_rgb(line[i]) != TRUE)
+				return (error_msg("Error\nRGB value error\n", ERROR_RGB));
 			if (status == NO || status == SO || status == WE || status == EA)
 			{
-				if (check_texture(line[i]) != SUCCESS)
-					return (FAILURE);
+				if (check_texture(line[i]) != TRUE)
+					return (error_msg("Error\nTexture value\n", ERROR_TEXT));
 			}
 			if (status == WALL)
 				break ;
 		}
-		if (check_rgb_aux(line) == 0)
-			return (error_msg("error rgb aux", ERROR_RGB));
+		if (check_rgb_aux(line) == FALSE)
+			return (error_msg("Error\nRGB value error\n", ERROR_RGB_2));
 	}
-	return (SUCCESS);
+	return (TRUE);
 }
