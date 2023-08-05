@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:16:28 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/02 11:34:35 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/05 10:40:25 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ t_bool	check_arguments(int argc, char **argv)
 		exit (error_msg("	Error\nWrong amount of arguments\n", ERROR_MSG));
 		return (FALSE);
 	}
-	if (check_file_extension(argv[1]) == FALSE)
+	if (!check_file_extension(argv[1]))
 	{
 		exit (error_msg("	Error\nWrong file extension\n", ERROR_EXTENSION));
 		return (FALSE);
 	}
-	if (check_file_exists(argv[1]) == FALSE)
+	if (!check_file_exists(argv[1]))
 	{
 		exit (error_msg("	Error\nFile doesn't exist\n", ERROR_FILE));
 		return (FALSE);
