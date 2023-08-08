@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   maze.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 15:15:20 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/08 15:39:32 by madmax42         ###   ########.fr       */
+/*   Created: 2023/07/12 19:47:17 by madmax42          #+#    #+#             */
+/*   Updated: 2023/08/08 15:30:38 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_player(char **map)
+char	**get_maze_map(char **file)
 {
-	int	i;
-	int	j;
-	int	value;
+	char	**map;
+	int		i;
+	int		j;
 
+	map = ft_calloc(map_count_line(file) + 1, sizeof(char *));
 	i = -1;
-	value = 0;
-	while (map[++i])
+	j = 0;
+	while (file[++i])
 	{
-		j = -1;
-		while (map[i][++j])
+		if (get_line_code(file[i]) == WALL)
 		{
-			if (ft_strchr("NSEW", map[i][j]))
-				value++;
+			map[j] = ft_calloc(max_colum(file) + 1, sizeof(char));
+			ft_strlcpy(map[j], file[i], ft_strlen(file[i]) + 1);
+			j++;
 		}
 	}
-	if (value == 1)
-		return (SUCCESS);
-	return (error_msg("number player wrong!!!", ERROR_MSG));
+	return (map);
 }

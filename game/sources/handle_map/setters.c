@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:17:53 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/31 15:41:18 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:31:45 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	set_value(t_cub *game, char **map)
 				&game->data.color.ceil_g, &game->data.color.ceil_b);
 		i++;
 	}
-	game->data.map = get_map(map);
+	game->data.map = get_maze_map(map);
 }

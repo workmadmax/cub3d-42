@@ -6,7 +6,7 @@
 #    By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/07 14:21:12 by madmax42          #+#    #+#              #
-#    Updated: 2023/07/30 15:17:11 by madmax42         ###   ########.fr        #
+#    Updated: 2023/08/08 15:29:40 by madmax42         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ MLX_LINUX					=	$(MLX_PATH)/libmlx_Linux.a
 INCLUDES					=	-I./includes -I$(LIBFT_PATH) -I$(MLX_PATH)
 
 SRCS						=	main.c \
-								get_map.c \
-								read_map.c \
+								getters.c \
+								maze.c \
+								reading.c \
 								setters.c \
 								assistant.c \
 								clean_data.c \
@@ -34,6 +35,7 @@ SRCS						=	main.c \
 								map.c \
 								player.c \
 								rgb.c \
+								rgb2.c \
 								texture.c \
 								wall.c \
 																	

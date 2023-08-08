@@ -6,31 +6,12 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:45:07 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/30 15:37:15 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/08 11:11:28 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_numeric_string(const char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (FAILURE);
-	while (str[i] == ' ')
-		i++;
-	if (str[i] == '\0')
-		return (FAILURE);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (FAILURE);
-		i++;
-	}
-	return (SUCCESS);
-}
 
 int	map_count_line(char **map)
 {
@@ -59,7 +40,7 @@ int	max_colum(char **map)
 	{
 		if (get_line_code(map[i]) == WALL)
 		{
-			if ((int)ft_strlen(map[i]) > size)
+			if (size < (int)ft_strlen(map[i]))
 				size = ft_strlen(map[i]);
 		}
 		i++;

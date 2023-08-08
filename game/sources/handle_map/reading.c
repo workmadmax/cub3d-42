@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   reading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 19:44:59 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/30 15:31:36 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:29:55 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 char	**read_file_lines(const char *file)
 {
@@ -22,7 +21,7 @@ char	**read_file_lines(const char *file)
 	char	**content;
 
 	size = count_file_lines(file);
-	fd = open(file, O_RDONLY);
+	fd = open(file, O_RDWR);
 	if (fd < 1)
 		return (NULL);
 	content = ft_calloc(size + 1, sizeof(char *));
