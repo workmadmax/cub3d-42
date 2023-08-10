@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 11:26:46 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/10 11:16:33 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:20:20 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@
 	return (0);
 }
  */
+
+# define MAP 99
+
 int	get_flag_code(char *str)
 {
 	if (str[0] == '\0')
 		return (END);
+	else if (str[0] == '0')
+		return (MAP);
 	else if (str[0] == '\n')
 		return (NEW_LINE);
 	else if (str[0] == '1')

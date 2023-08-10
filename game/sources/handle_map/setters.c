@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 14:17:53 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/08 15:31:45 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:34:20 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,14 @@ void	set_value(t_cub *game, char **map)
 		i++;
 	}
 	game->data.map = get_maze_map(map);
+	int map_height = max_line_maze(game->data.map);
+    int map_width = max_colum(game->data.map);
+
+    // Print game->data.map for debug
+    for (int i = 0; i < map_height; i++)
+    {
+        for (int j = 0; j < map_width; j++)
+            printf("%c", game->data.map[i][j]);
+        printf("\n");
+    }
 }

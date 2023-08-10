@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:03:56 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/08 15:40:55 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 12:31:00 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,18 @@ t_bool	check_line_position(char **line);
 /* validation map.c */
 
 int		check_char_map(char **map);
-int		check_map_file(char **map);
+t_bool	check_maze_map(char **map);
 void	check_cub_map_file(char **map);
 
 /* validation player */
 
-int		check_player(char **map);
+int		set_player_position(char **maze, t_check_p *check_p);
+void	flood_fill(char **maze, int x, int y);
 
 /* validation rgb */
 
 int		validate_rgb_range(const char *str);
+int		is_numeric_string(const char *str);
 int		check_rgb_value(const char *line);
 int		check_rgb(char *line);
 
@@ -96,13 +98,13 @@ int		check_texture(char *line);
 
 /* validations wall */
 
-int		check_is_closed(char **map);
-int		handle_map_horizontal(char **map, int i, int j);
-int		handle_map_vertical(char **map, int i, int j);
+t_bool	check_vertical_walls(char **maze, int height, int width);
+t_bool	check_horizontal_walls(char **maze, int height, int width);
+t_bool	is_valid_exit(char **maze);
 
 /* utils assistant */
 
-int		is_numeric_string(const char *str);
+int		max_line_maze(char **maze);
 int		map_count_line(char **map);
 int		max_colum(char **map);
 int		count_file_lines(const char *file);

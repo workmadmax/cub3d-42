@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 13:42:19 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/06 13:15:25 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 15:16:45 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,13 @@ t_bool	check_count_flag(t_check *data)
 	if (data->no != 1 || data->so != 1 || data->we != 1 || data->ea != 1
 		|| data->f != 1 || data->c != 1)
 	{
-		error_msg("Error\n Amount of Flag \n", ERROR_COUNT_FLAG);
+		printf("no = %d\n", data->no);
+		printf("so = %d\n", data->so);
+		printf("we = %d\n", data->we);
+		printf("ea = %d\n", data->ea);
+		printf("f = %d\n", data->f);
+		printf("c = %d\n", data->c);
+		error_msg("error amout flags:", ERROR_COUNT_FLAG);
 		return (FALSE);
 	}
 	return (TRUE);

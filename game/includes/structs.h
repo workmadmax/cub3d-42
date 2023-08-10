@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:11:55 by madmax42          #+#    #+#             */
-/*   Updated: 2023/07/31 10:41:15 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/09 11:59:22 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_check_player
 	int	loc_x;
 	int	loc_y;
 	int	count;
-}	t_cp;
+}	t_check_p;
 
 
 typedef struct s_color

@@ -6,12 +6,14 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:13:05 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/07 18:27:41 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/09 19:22:01 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
+
+# define EMPTY 23
 
 # define ERROR_MSG -100
 # define ERROR_EXTENSION -101

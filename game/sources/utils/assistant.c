@@ -6,24 +6,38 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:45:07 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/08 11:11:28 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:34:04 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	max_line_maze(char **maze)
+{
+	int	max;
+
+	max = 0;
+	while (maze[max] != NULL)
+		max++;
+	return (max);
+}
 
 int	map_count_line(char **map)
 {
 	int	i;
 	int	size;
+	int	found_first_wall;
 
 	i = 0;
 	size = 0;
+	found_first_wall = 0;
 	while (map[i])
 	{
-		if (get_line_code(map[i]) == WALL)
+		if (get_line_code(map[i]) == WALL || found_first_wall)
+		{
 			size++;
+			found_first_wall = 1;
+		}
 		i++;
 	}
 	return (size);
@@ -33,15 +47,20 @@ int	max_colum(char **map)
 {
 	int	i;
 	int	size;
+	int	found_first_wall;
+	int	len;
 
 	i = 0;
 	size = 0;
+	found_first_wall = 0;
 	while (map[i])
 	{
-		if (get_line_code(map[i]) == WALL)
+		if (get_line_code(map[i]) == WALL || found_first_wall)
 		{
-			if (size < (int)ft_strlen(map[i]))
-				size = ft_strlen(map[i]);
+			len = ft_strlen(map[i]);
+			if (len > size)
+				size = len;
+			found_first_wall = 1;
 		}
 		i++;
 	}

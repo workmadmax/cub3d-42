@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:39:57 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/10 12:32:04 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:49:45 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ int	check_char_map(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (ft_strchr("01NSEW\n ", map[i][j]) == NULL)
+			if (ft_strchr("01NSEW\t\n ", map[i][j]) == NULL)
 				return (error_msg(map[i], ERROR_LINE));
 		}
 	}
 	return (SUCCESS);
 }
+
+
 
 t_bool	check_maze_map(char **map)
 {
@@ -47,7 +49,14 @@ t_bool	check_maze_map(char **map)
 		free_string_array(copy_map);
 		return (FALSE);
 	}
+	//printf("Map before flood fill:\n");
+	/* for (int i = 0; copy_map[i]; i++)
+    printf("%s\n", copy_map[i]); */
 	flood_fill(copy_map, check_p.loc_x, check_p.loc_y);
+	// print copy map
+	printf("depois do flood fill: \n");
+	for (int i = 0; copy_map[i]; i++)
+		printf("%s\n", copy_map[i]);
 	if (!is_valid_exit(copy_map))
 	{
 		free_string_array(copy_map);
