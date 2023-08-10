@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 11:26:46 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/08 14:52:02 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 11:16:33 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@
  */
 int	get_flag_code(char *str)
 {
-	if (str[0] == '1')
-		return (WALL);
 	if (str[0] == '\0')
 		return (END);
-	if (str[0] == '\n')
+	else if (str[0] == '\n')
 		return (NEW_LINE);
-	if (ft_strncmp(str, "C", ft_strlen(str)) == 0)
+	else if (str[0] == '1')
+		return (WALL);
+	else if (ft_strncmp(str, "C", ft_strlen(str)) == 0)
 		return (C);
-	if (ft_strncmp(str, "F", ft_strlen(str)) == 0)
+	else if (ft_strncmp(str, "F", ft_strlen(str)) == 0)
 		return (F);
-	if (ft_strncmp(str, "NO", ft_strlen(str)) == 0)
+	else if (ft_strncmp(str, "NO", ft_strlen(str)) == 0)
 		return (NO);
-	if (ft_strncmp(str, "SO", ft_strlen(str)) == 0)
+	else if (ft_strncmp(str, "SO", ft_strlen(str)) == 0)
 		return (SO);
-	if (ft_strncmp(str, "WE", ft_strlen(str)) == 0)
+	else if (ft_strncmp(str, "WE", ft_strlen(str)) == 0)
 		return (WE);
-	if (ft_strncmp(str, "EA", ft_strlen(str)) == 0)
+	else if (ft_strncmp(str, "EA", ft_strlen(str)) == 0)
 		return (EA);
 	return (FAILURE);
 }
