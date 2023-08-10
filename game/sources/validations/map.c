@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:39:57 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/08 15:44:01 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 12:32:04 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,43 +30,29 @@ int	check_char_map(char **map)
 	return (SUCCESS);
 }
 
-int	check_map_file(char **map)
+t_bool	check_maze_map(char **map)
 {
-	char	**map_aux;
+	char		**copy_map;
+	t_check_p	check_p;
 
-	map_aux = get_maze_map(map);
-	if (!map_aux)
-		return (error_msg("Failed to alloc memory!", ERROR_MALLOC));
-	if (check_char_map(map_aux) == FAILURE)
+	ft_memset(&check_p, 0, sizeof(t_check_p));
+	copy_map = get_maze_map(map);
+	if (check_char_map(copy_map) != SUCCESS)
 	{
-		free_string_array(map_aux);
-		return (FAILURE);
+		free_string_array(copy_map);
+		return (FALSE);
 	}
-	if (check_player(map_aux) == FAILURE)
+	if (set_player_position(copy_map, &check_p) != SUCCESS)
 	{
-		free_string_array(map_aux);
-		return (FAILURE);
+		free_string_array(copy_map);
+		return (FALSE);
 	}
-	if (check_is_closed(map_aux) == FAILURE)
+	flood_fill(copy_map, check_p.loc_x, check_p.loc_y);
+	if (!is_valid_exit(copy_map))
 	{
-		free_string_array(map_aux);
-		return (error_msg("The map need to be \
-				surrounded by walls!!!", WALL_ERROR));
+		free_string_array(copy_map);
+		return (FALSE);
 	}
-	free_string_array(map_aux);
-	return (SUCCESS);
-}
-
-void	check_cub_map_file(char **map)
-{
-	if (!check_first_word(map))
-		free_and_close(map);
-	if (!check_line_position(map))
-		free_and_close(map);
-	if (!check_amount_flag(map))
-		free_and_close(map);
-	if (check_value_flag(map) == FAILURE)
-		free_and_close(map);
-	if (check_map_file(map) == FAILURE)
-		free_and_close(map);
+	free_string_array(copy_map);
+	return (TRUE);
 }
