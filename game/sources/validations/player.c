@@ -6,7 +6,7 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:15:20 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/10 11:33:57 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:55:10 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ static int	valid_char_player(const char *val_char)
 	return (SUCCESS);
 }
 
-
-
-
-// flood fill in maze map
 void	flood_fill(char **maze, int x, int y)
 {
 	if (maze[x][y] == '0' || valid_char_player(&maze[x][y]) == SUCCESS)
@@ -38,7 +34,6 @@ void	flood_fill(char **maze, int x, int y)
 			flood_fill(maze, x, y + 1);
 	}
 }
-
 
 static void	update_player_loc(t_check_p *check_p, int x, int y)
 {

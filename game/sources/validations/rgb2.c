@@ -6,35 +6,39 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:56:18 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/07 19:57:03 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:00:06 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int compare_rgb(const char* color1, const char* color2)
+static int	compare_rgb(const char *color1, const char *color2)
 {
-    return (ft_strncmp(color1 + 2, color2 + 2, ft_strlen(color1 + 2)));
+	return (ft_strncmp(color1 + 2, color2 + 2, ft_strlen(color1 + 2)));
 }
 
-int check_rgb_aux(char** line) {
-    int i;
-    char* ceiling = NULL;
-    char* floor = NULL;
+int	check_rgb_aux(char **line)
+{
+	int		i;
+	int		res;
+	char	*ceiling;
+	char	*floor;
 
-    i = 0;
-    while (line[i]) {
-        if (line[i][0] == 'C')
-            ceiling = ft_strdup(line[i]);
-        else if (line[i][0] == 'F')
-            floor = ft_strdup(line[i]);
-        i++;
-    }
-
-    int result = compare_rgb(ceiling, floor);
-    free_string(ceiling);
-    free_string(floor);
-    return result;
+	ceiling = NULL;
+	floor = NULL;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i][0] == 'C')
+			ceiling = ft_strdup(line[i]);
+		else if (line[i][0] == 'F')
+			floor = ft_strdup(line[i]);
+		i++;
+	}
+	res = compare_rgb(ceiling, floor);
+	free_string(ceiling);
+	free_string(floor);
+	return (res);
 }
 
 int	check_rgb_cf(char *ceiling, char *floor)
@@ -50,27 +54,6 @@ int	check_rgb_cf(char *ceiling, char *floor)
 	free_string_array(aux_floor);
 	return (res);
 }
-
-/* int	check_rgb_aux(char **line)
-{
-	int		i;
-	char	*ceiling;
-	char	*floor;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i][0] == 'C')
-			ceiling = ft_strdup(line[i]);
-		else if (line[i][0] == 'F')
-			floor = ft_strdup(line[i]);
-		i++;
-	}
-	i = check_rgb_cf(ceiling, floor);
-	free_string(ceiling);
-	free_string(floor);
-	return (i);
-} */
 
 int	check_value_flag(char **line)
 {
