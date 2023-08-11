@@ -6,12 +6,11 @@
 /*   By: madmax42 <madmax42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 10:25:33 by madmax42          #+#    #+#             */
-/*   Updated: 2023/08/10 16:50:47 by madmax42         ###   ########.fr       */
+/*   Updated: 2023/08/10 17:01:12 by madmax42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static t_bool check_internal_walls(char **maze)
 {
