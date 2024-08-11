@@ -1,3 +1,3 @@
 # 42cursus-cub3D
 
-![alt text](image.png)
+![alt text](./cub3d/assets/imgs/image.png)
